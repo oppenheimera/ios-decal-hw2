@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     // MARK: Width and Height of Screen for Layout
     var w: CGFloat!
     var h: CGFloat!
-    
+    var str: String!
 
     // IMPORTANT: Do NOT modify the name or class of resultLabel.
     //            We will be using the result label to run autograded tests.
@@ -53,6 +53,7 @@ class ViewController: UIViewController {
     //       Modify this one or create your own.
     func updateResultLabel(_ content: String) {
         print("Update me like one of those PCs")
+        resultLabel.text = content
     }
     
     
@@ -66,7 +67,16 @@ class ViewController: UIViewController {
     //       Modify this one or create your own.
     func intCalculate(a: Int, b:Int, operation: String) -> Int {
         print("Calculation requested for \(a) \(operation) \(b)")
-        return 0
+        if operation == "+" {
+                return a + b
+        } else if operation == "-" {
+            return a - b
+        } else if operation == "/" {
+            return a / b
+        } else if operation == "*" {
+            return a * b
+        }
+        
     }
     
     // TODO: A general calculate method for doubles
@@ -80,17 +90,35 @@ class ViewController: UIViewController {
     func numberPressed(_ sender: CustomButton) {
         guard Int(sender.content) != nil else { return }
         print("The number \(sender.content) was pressed")
+        updateResultLabel(sender.content)
         // Fill me in!
+        str = ""
+        if someDataStructure.count < 8 {
+            someDataStructure += [sender.currentTitle!]
+        }
+        for n in someDataStructure {
+            str = str + n
+            updateResultLabel(str)
+        }
     }
     
     // REQUIRED: The responder to an operator button being pressed.
     func operatorPressed(_ sender: CustomButton) {
+        guard Int(sender.content) != nil else { return }
+        print("the operator \(sender.content) was pressed")
         // Fill me in!
     }
     
     // REQUIRED: The responder to a number or operator button being pressed.
     func buttonPressed(_ sender: CustomButton) {
-       // Fill me in!
+        // Fill me in!
+        str = ""
+        someDataStructure += [sender.currentTitle!]
+        for n in someDataStructure {
+            str = str + n
+        }
+        updateResultLabel(str)
+        print("pressed \(str)")
     }
     
     // IMPORTANT: Do NOT change any of the code below.
